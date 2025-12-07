@@ -1,4 +1,4 @@
-# Build stage for frontend
+# Build stage for frontend (use build platform for speed)
 FROM --platform=$BUILDPLATFORM node:20-alpine AS frontend-build
 
 WORKDIR /app/frontend
@@ -15,10 +15,10 @@ COPY frontend/ ./
 # Build frontend
 RUN npm run build
 
-# Build stage for backend
-FROM node:20-alpine AS backend-build
+# Build stage for backend (use build platform for speed)
+FROM --platform=$BUILDPLATFORM node:20-alpine AS backend-build
 
-# Install OpenSSL for Prisma (without libc6-compat which causes QEMU issues)
+# Install OpenSSL for Prisma
 RUN apk add --no-cache openssl openssl-dev
 
 WORKDIR /app
@@ -42,17 +42,21 @@ COPY tsconfig.json ./
 # Build TypeScript
 RUN npm run build
 
-# Production stage
-FROM node:20-alpine AS production
+# Production stage - use Debian-based image to avoid Alpine QEMU issues
+FROM node:20-slim AS production
 
 WORKDIR /app
 
-# Install dumb-init for proper signal handling and OpenSSL for Prisma
-RUN apk add --no-cache dumb-init openssl
+# Install dumb-init and required packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    dumb-init \
+    openssl \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001
+RUN groupadd -g 1001 nodejs && \
+    useradd -u 1001 -g nodejs -s /bin/bash nodejs
 
 # Copy package files and install production dependencies only
 COPY package*.json ./
