@@ -1,8 +1,13 @@
+# Docker Compose for local development/building
+# Usage: docker-compose -f docker-compose.build.yml up -d --build
+
 version: '3.8'
 
 services:
   app:
-    image: theinfamoustoto/n8n-approval-service:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: n8n-approval-service
     restart: unless-stopped
     ports:
