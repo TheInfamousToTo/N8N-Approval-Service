@@ -147,18 +147,20 @@ export default function Setup() {
               <Typography variant="subtitle2" fontWeight={600}>
                 Submit Post (n8n Workflow 1)
               </Typography>
-              <Typography
-                variant="body2"
+              <Box
                 sx={{
                   fontFamily: 'monospace',
-                  backgroundColor: 'grey.100',
+                  fontSize: '0.875rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   p: 1.5,
                   borderRadius: 1,
                   wordBreak: 'break-all',
+                  overflowX: 'auto',
                 }}
               >
-                POST {appUrl}/api/v1/posts/submit
-              </Typography>
+                <Box component="span" sx={{ color: '#4ade80', fontWeight: 600 }}>POST</Box> {appUrl}/api/v1/posts/submit
+              </Box>
               <Typography variant="caption" color="text.secondary">
                 Send: {`{ "content": "...", "source": "...", "n8n_callback_url": "..." }`}
               </Typography>
@@ -170,18 +172,20 @@ export default function Setup() {
               <Typography variant="subtitle2" fontWeight={600}>
                 Approve Post (Discord Link)
               </Typography>
-              <Typography
-                variant="body2"
+              <Box
                 sx={{
                   fontFamily: 'monospace',
-                  backgroundColor: 'grey.100',
+                  fontSize: '0.875rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   p: 1.5,
                   borderRadius: 1,
                   wordBreak: 'break-all',
+                  overflowX: 'auto',
                 }}
               >
-                GET {appUrl}/api/v1/posts/{'{post_id}'}/approve
-              </Typography>
+                <Box component="span" sx={{ color: '#60a5fa', fontWeight: 600 }}>GET</Box> {appUrl}/api/v1/posts/{'{post_id}'}/approve
+              </Box>
             </Box>
 
             <Divider />
@@ -190,18 +194,20 @@ export default function Setup() {
               <Typography variant="subtitle2" fontWeight={600}>
                 Reject Post (Discord Link)
               </Typography>
-              <Typography
-                variant="body2"
+              <Box
                 sx={{
                   fontFamily: 'monospace',
-                  backgroundColor: 'grey.100',
+                  fontSize: '0.875rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   p: 1.5,
                   borderRadius: 1,
                   wordBreak: 'break-all',
+                  overflowX: 'auto',
                 }}
               >
-                GET {appUrl}/api/v1/posts/{'{post_id}'}/reject
-              </Typography>
+                <Box component="span" sx={{ color: '#60a5fa', fontWeight: 600 }}>GET</Box> {appUrl}/api/v1/posts/{'{post_id}'}/reject
+              </Box>
             </Box>
 
             <Divider />
@@ -210,18 +216,20 @@ export default function Setup() {
               <Typography variant="subtitle2" fontWeight={600}>
                 Mark as Posted (n8n Workflow 2)
               </Typography>
-              <Typography
-                variant="body2"
+              <Box
                 sx={{
                   fontFamily: 'monospace',
-                  backgroundColor: 'grey.100',
+                  fontSize: '0.875rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   p: 1.5,
                   borderRadius: 1,
                   wordBreak: 'break-all',
+                  overflowX: 'auto',
                 }}
               >
-                PUT {appUrl}/api/v1/posts/{'{post_id}'}/posted
-              </Typography>
+                <Box component="span" sx={{ color: '#f59e0b', fontWeight: 600 }}>PUT</Box> {appUrl}/api/v1/posts/{'{post_id}'}/posted
+              </Box>
             </Box>
           </Box>
         </CardContent>

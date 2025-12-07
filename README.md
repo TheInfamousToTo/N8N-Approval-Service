@@ -285,6 +285,15 @@ N8N-Approval-Service/
 
 MIT License - see LICENSE file for details.
 
+## ❤️ Support
+
+If you find this project useful, consider supporting:
+
+- ⭐ [Star on GitHub](https://github.com/TheInfamousToTo/N8N-Approval-Service)
+- ☕ [Buy Me a Coffee](https://buymeacoffee.com/theinfamoustoto)
+- ❤️ [Support on Ko-fi](https://ko-fi.com/theinfamoustoto)
+- 💖 [GitHub Sponsors](https://github.com/sponsors/TheInfamousToTo)
+
 ## 🤝 Contributing
 
 1. Fork the repository

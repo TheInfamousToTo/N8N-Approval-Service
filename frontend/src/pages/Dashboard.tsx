@@ -36,6 +36,9 @@ import {
   Send as PostedIcon,
   ThumbUp as ThumbUpIcon,
   ThumbDown as ThumbDownIcon,
+  GitHub as GitHubIcon,
+  Coffee as CoffeeIcon,
+  Favorite as FavoriteIcon,
 } from '@mui/icons-material'
 import { postsApi } from '../api'
 import { Post, Stats } from '../types'
@@ -154,11 +157,37 @@ export default function Dashboard() {
         <Typography variant="h4" fontWeight={600}>
           Dashboard
         </Typography>
-        <Tooltip title="Refresh">
-          <IconButton onClick={loadData} disabled={loading}>
-            <RefreshIcon />
-          </IconButton>
-        </Tooltip>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Tooltip title="Star on GitHub">
+            <IconButton
+              onClick={() => window.open('https://github.com/TheInfamousToTo/N8N-Approval-Service', '_blank')}
+              sx={{ color: '#f59e0b' }}
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Buy Me a Coffee">
+            <IconButton
+              onClick={() => window.open('https://buymeacoffee.com/theinfamoustoto', '_blank')}
+              sx={{ color: '#ff813f' }}
+            >
+              <CoffeeIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Support on Ko-fi">
+            <IconButton
+              onClick={() => window.open('https://ko-fi.com/theinfamoustoto', '_blank')}
+              sx={{ color: '#ff5e5b' }}
+            >
+              <FavoriteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Refresh">
+            <IconButton onClick={loadData} disabled={loading}>
+              <RefreshIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Box>
 
       {/* Stats Cards */}
@@ -386,18 +415,19 @@ export default function Dashboard() {
                   <Typography variant="subtitle2" color="text.secondary">
                     n8n Callback URL
                   </Typography>
-                  <Typography
-                    variant="body2"
+                  <Box
                     sx={{
                       wordBreak: 'break-all',
-                      backgroundColor: 'grey.100',
-                      p: 1,
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      p: 1.5,
                       borderRadius: 1,
                       fontFamily: 'monospace',
+                      fontSize: '0.875rem',
                     }}
                   >
                     {selectedPost.n8n_callback_url}
-                  </Typography>
+                  </Box>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant="subtitle2" color="text.secondary">
