@@ -1,5 +1,5 @@
 # Build stage for frontend
-FROM node:20-alpine AS frontend-build
+FROM --platform=$BUILDPLATFORM node:20-alpine AS frontend-build
 
 WORKDIR /app/frontend
 
@@ -18,8 +18,8 @@ RUN npm run build
 # Build stage for backend
 FROM node:20-alpine AS backend-build
 
-# Install OpenSSL for Prisma
-RUN apk add --no-cache openssl openssl-dev libc6-compat
+# Install OpenSSL for Prisma (without libc6-compat which causes QEMU issues)
+RUN apk add --no-cache openssl openssl-dev
 
 WORKDIR /app
 
@@ -48,7 +48,7 @@ FROM node:20-alpine AS production
 WORKDIR /app
 
 # Install dumb-init for proper signal handling and OpenSSL for Prisma
-RUN apk add --no-cache dumb-init openssl libc6-compat
+RUN apk add --no-cache dumb-init openssl
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs && \
