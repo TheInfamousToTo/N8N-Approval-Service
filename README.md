@@ -2,17 +2,20 @@
 
 A production-ready human-in-the-loop approval system for n8n workflows. This service acts as a bridge between your n8n content generation workflow and your posting workflow, allowing manual approval via Discord before content gets published.
 
-![Dashboard Preview]()
+![Dashboard Preview](./docs/dashboard-preview.png)
 
 ## 🎯 Features
 
+- **Modern Dashboard UI**: Clean, intuitive interface with real-time post statistics (Pending, Approved, Rejected, Posted)
+- **Post Management**: View and manage all posts with filtering by status (All, Pending, Approved, Rejected, Posted)
+- **Quick Actions**: One-click approve, reject, view, and delete actions directly from the dashboard
 - **Post Submission API**: Receive posts from n8n with automatic Discord notifications
 - **Discord Integration**: Rich embed notifications with clickable Approve/Reject buttons
 - **Two-Workflow Model**: Separates content generation from posting for clean workflow design
-- **Dashboard**: React-based UI with status filtering and post management
 - **Configuration Page**: Easy setup for Discord webhooks and n8n integration
 - **PostgreSQL Storage**: Reliable persistence for all posts and settings
 - **Docker Ready**: Full containerization with docker-compose
+- **Social Media Integration**: Quick links to GitHub, Ko-fi, and GitHub Sponsors
 
 ## 🏗️ Architecture
 
