@@ -1,5 +1,7 @@
 # N8N Approval Service
 
+[![GitHub Activity](https://img.shields.io/badge/📈_Pulse-Activity-blue?logo=github)](https://github.com/TheInfamousToTo/N8N-Approval-Service/pulse)
+
 A production-ready human-in-the-loop approval system for n8n workflows. This service acts as a bridge between your n8n content generation workflow and your posting workflow, allowing manual approval via Discord before content gets published.
 
 ![Dashboard Preview](./docs/dashboard-preview.png)
