@@ -1,5 +1,5 @@
 # Build stage for frontend (use build platform for speed)
-FROM --platform=$BUILDPLATFORM node:20-alpine AS frontend-build
+FROM --platform=$BUILDPLATFORM node:24-alpine AS frontend-build
 
 WORKDIR /app/frontend
 
@@ -16,7 +16,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Build stage for backend (use build platform for speed)
-FROM --platform=$BUILDPLATFORM node:20-alpine AS backend-build
+FROM --platform=$BUILDPLATFORM node:24-alpine AS backend-build
 
 # Install OpenSSL for Prisma
 RUN apk add --no-cache openssl openssl-dev
@@ -43,12 +43,12 @@ COPY tsconfig.json ./
 RUN npm run build
 
 # Production stage - use Debian-based image to avoid Alpine QEMU issues
-FROM node:20-slim AS production
+FROM node:24-trixie-slim AS production
 
 WORKDIR /app
 
 # Install dumb-init and required packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     dumb-init \
     openssl \
     wget \
@@ -60,7 +60,12 @@ RUN groupadd -g 1001 nodejs && \
 
 # Copy package files and install production dependencies only
 COPY package*.json ./
-RUN npm install --omit=dev
+# npm is not needed at runtime: the prisma CLI is a local dependency and is
+# run from node_modules/.bin. Removing npm drops its bundled dependencies,
+# which made up most of the node-pkg findings in the nightly Trivy scan.
+RUN npm install --omit=dev \
+    && npm cache clean --force \
+    && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 
 # Copy prisma schema and generated client
 COPY --from=backend-build /app/node_modules/.prisma ./node_modules/.prisma
@@ -90,4 +95,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 ENTRYPOINT ["dumb-init", "--"]
 
 # Start the application
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+CMD ["sh", "-c", "node_modules/.bin/prisma migrate deploy && node dist/index.js"]
